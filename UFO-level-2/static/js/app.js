@@ -17,61 +17,53 @@ var inputField = d3.select("#searchInput");
 // Declare global variable to store search criteria
 var search_info = ""
 
-// Set dropdown button to select search criteria and set variable to store search criteria
-datetime_btn.on("click", function(){
-    inputField.property("value","");
-    inputField.attr("placeholder", "1/1/2010");
-    search_info = "datetime";
-})
-
-city_btn.on("click", function city(){
-    inputField.property("value","");
-    inputField.attr("placeholder", "benton");
-    search_info = "city";
-})
-
-state_btn.on("click", function(){
-    inputField.property("value","");
-    inputField.attr("placeholder", "ar");
-    search_info = "state";
-})
-
-country_btn.on("click", function(){
-    inputField.property("value","");
-    inputField.attr("placeholder", "us");
-    search_info = "country";
-})
-
-shape_btn.on("click", function(){
-    inputField.property("value","");
-    inputField.attr("placeholder", "circle");
-    search_info = "shape";
-})
-
-
 // Select the table
 var tbody = d3.select("#ufo-table").select("tbody");
 
 // use button "on" to attach the search function
+d3.selectAll(".filter").on("change", updateFilters)
+
 filter_btn.on("click", function() {
-    search(search_info);
+    search();
 })
-//filter_btn.on("click", search(search_info))
 
+//define functions to update filters chosen by users.
 
-// Define the search function
-function search(info) {
-    var inputField = d3.select("#searchInput");
+var filters = {};
 
-    // Get the value property of the input element
-    var inputValue = inputField.property("value");
+function updateFilters() { 
 
+    filters = {};
+
+    var changeElement = d3.select(this).select("input");
+    var elementValue = changeElement.property("value");
+    var filterID = changeElement.attr("id");
+
+    if (elementValue) {
+        filters[filterID] = elementValue;
+    }
+    else {
+        delete filters[filterID];
+    }
+}
+
+// Define the search function to filter date based on filters input.
+function search() {
+  
     // Use the form input to filter the data by date
-    var results = data.filter(ufo => ufo[info] === inputValue);
-
+    Object.entries(filters).forEach(([key, value]) => {
+        results =  data.filter(ufo => ufo[key] === value);
+    })
+    
     // Clear previous search result
     tbody.html("");
 
+    updateTable();
+
+}
+
+// define function to populate table based on filter results. 
+function updateTable() {
     // Add data to table
     results.forEach((item) => {
         var new_tr = tbody.append("tr")
@@ -84,4 +76,3 @@ function search(info) {
         new_tr.append("td").text(item.comments);
     })
 }
-

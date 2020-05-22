@@ -36,20 +36,24 @@
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Search Info
-                            <span class="caret"></span>
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="btn btn-default" id="datetime-btn" type="button">Date</button>
-                            <button class="btn btn-default" id="city-btn" type="button">City</button>
-                            <button class="btn btn-default" id="state-btn" type="button">State</button>
-                            <button class="btn btn-default" id="country-btn" type="button">Country</button>
-                            <button class="btn btn-default" id="shape-btn" type="button">Shape</button>
-                          </div>
-                        </div>
-                        <input class="form-control" id="searchInput" type="text" placeholder="Select type">
+                        <label for="date">Enter a Date</label>
+                        <input class="form-control filters" id="datetime" type="text" placeholder="1/11/2011">
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="city">Enter a City</label>
+                        <input class="form-control filters" id="city" type="text" placeholder="benton">
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="state">Enter a State</label>
+                        <input class="form-control filters" id="state" type="text" placeholder="ar">
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="country">Enter a Country</label>
+                        <input class="form-control filters" id="country" type="text" placeholder="us">
+                      </li>
+                      <li class="filter list-group-item">
+                        <label for="shape">Enter a Shape</label>
+                        <input class="form-control filters" id="shape" type="text" placeholder="triangle">
                       </li>
                     </ul>
                   </div>
